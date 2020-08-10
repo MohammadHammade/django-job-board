@@ -2,7 +2,7 @@ from django.db import models
 
 # Create your models here.
 
-# django models field will have a
+#  using models.Model inheritance , django models field will have a
 #     - html widget
 #     - validation
 #     - db size
@@ -32,7 +32,15 @@ class job(models.Model): # each class equal table in db
     vacancy = models.IntegerField(default=1)
     salary = models.IntegerField(default=0)
     experience = models.IntegerField(default=1)
-
+    category = models.ForeignKey('category',on_delete=models.CASCADE,)
+    
     # to define object name
     def __str__(self):
         return self.title
+
+class category(models.Model):
+    
+    name = models.CharField(max_length=25)
+
+    def __str__(self):
+        return self.name

@@ -4,7 +4,9 @@ from django.contrib import admin
 
 # here to add the modelfile to website admin
 
-from .models import job
+from .models import job, category
 
 #the job app will add to website admin
 admin.site.register(job)
+
+admin.site.register(category)
