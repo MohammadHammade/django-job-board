@@ -16,6 +16,11 @@ JOB_TYPE = (
     ('Full TIme','Full TIme'),
     ('Part Time','Part TIme'),
 )
+
+# instance is obj of job class
+def image_upload(instance,filename):
+    imagename , extension = filename.split(".") 
+    return f'jobs/{instance.id}_{imagename}.{extension}'
 class job(models.Model): # each class equal table in db 
     
     # each field equal column in db 
@@ -33,7 +38,8 @@ class job(models.Model): # each class equal table in db
     salary = models.IntegerField(default=0)
     experience = models.IntegerField(default=1)
     category = models.ForeignKey('category',on_delete=models.CASCADE,)
-    
+    image = models.ImageField(upload_to=image_upload)
+
     # to define object name
     def __str__(self):
         return self.title

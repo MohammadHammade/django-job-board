@@ -15,4 +15,4 @@ def job_list(request):
 def job_details(request, id):
     job_details = job.objects.get(id=id)
     context = {'job': job_details}
-    return render(request,'job/job_details.html',context)
+    return render(request,'job/job_detail.html',context)
