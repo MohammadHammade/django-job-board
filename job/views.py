@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .models import job
 from django.core.paginator import Paginator
 from django.shortcuts import render
+from .form import apply_form
 
 # Create your views here.
 def job_list(request):
@@ -22,5 +23,21 @@ def job_list(request):
 
 def job_details(request, slug):
     job_details = job.objects.get(slug=slug)
-    context = {'job': job_details}
+
+    # if applyjob is clicked 
+    if request.method == 'POST':
+        # the returned data will be in request.POST
+        # the uploaded file and image will be in request.FIELS
+        form = apply_form(request.POST,request.FILES)
+        if form.is_valid():
+            myform = form.save(commit=False)
+            myform.job =job_details
+            myform = form.save()
+            
+    # no supplied datqa >> just show the form page 
+    else:
+        form = apply_form()
+
+
+    context = {'job': job_details,'form':form}
     return render(request,'job/job_detail.html',context)

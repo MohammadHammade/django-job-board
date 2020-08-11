@@ -43,6 +43,12 @@ class job(models.Model): # each class equal table in db
     # to make semantic words in urls as the title of the job
     slug = models.SlugField(blank=True,null=True)
 
+
+
+
+
+
+
     #override the save method
     def save(self, *args,**keywords):
         # code execute before admin click save in admin page
@@ -57,9 +63,27 @@ class job(models.Model): # each class equal table in db
     def __str__(self):
         return self.title
 
+
+
+
 class category(models.Model):
     
     name = models.CharField(max_length=25)
 
     def __str__(self):
         return self.name
+
+
+class apply(models.Model):
+    job = models.ForeignKey(job,related_name='apply_job',on_delete=models.CASCADE)
+    name = models.CharField(max_length=50)
+    email = models.EmailField(max_length=100)
+    website = models.URLField()
+    cv = models.FileField(upload_to='apply/')
+    cover_letter = models.TextField(max_length=500)
+    created_at = models.DateField(auto_now=True)
+
+    
+    def __str__(self):
+        return self.name
+    

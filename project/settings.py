@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # my apps # write in terminal ( python manage.py migrate ) to migrate django file with database (users,authentication,groups ...)"Control Panel"
     'job',
+    'bootstrap4'
 ]
 
 MIDDLEWARE = [
