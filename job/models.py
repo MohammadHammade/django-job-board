@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.utils .text import slugify
 # Create your models here.
 
 #  using models.Model inheritance , django models field will have a
@@ -39,6 +39,19 @@ class job(models.Model): # each class equal table in db
     experience = models.IntegerField(default=1)
     category = models.ForeignKey('category',on_delete=models.CASCADE,)
     image = models.ImageField(upload_to=image_upload)
+
+    # to make semantic words in urls as the title of the job
+    slug = models.SlugField(blank=True,null=True)
+
+    #override the save method
+    def save(self, *args,**keywords):
+        # code execute before admin click save in admin page
+        
+        #slagify is method in django apply something on string
+        # ex home page => home-page
+        self.slug = slugify(self.title)
+        
+        super(job,self).save(*args,**keywords  )
 
     # to define object name
     def __str__(self):

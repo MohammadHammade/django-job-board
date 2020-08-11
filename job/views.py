@@ -11,7 +11,7 @@ def job_list(request):
     
     #for pagination
     n = 1
-    paginator = Paginator(job_list,n) #shoq n page
+    paginator = Paginator(job_list,n) #show n page
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
@@ -20,7 +20,7 @@ def job_list(request):
     context = {'jobs':job_list,'page':page_obj }
     return render(request,'job/job_list.html',context)
 
-def job_details(request, id):
-    job_details = job.objects.get(id=id)
+def job_details(request, slug):
+    job_details = job.objects.get(slug=slug)
     context = {'job': job_details}
     return render(request,'job/job_detail.html',context)
