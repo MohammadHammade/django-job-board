@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils .text import slugify
+from django.contrib.auth.models import User
 # Create your models here.
 
 #  using models.Model inheritance , django models field will have a
@@ -28,7 +29,7 @@ class job(models.Model): # each class equal table in db
     #  html widget (input field because charfield) to "title"
     #  validation (input field  <= 100 chars) to "title"
     #  best db column datatype to "title"
-    
+    owner = models.ForeignKey(User,related_name='job_owner', on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     # location
     job_type = models.CharField(max_length=15,choices=JOB_TYPE)
@@ -37,7 +38,7 @@ class job(models.Model): # each class equal table in db
     vacancy = models.IntegerField(default=1)
     salary = models.IntegerField(default=0)
     experience = models.IntegerField(default=1)
-    category = models.ForeignKey('category',on_delete=models.CASCADE,)
+    category = models.ForeignKey('category',on_delete=models.CASCADE)
     image = models.ImageField(upload_to=image_upload)
 
     # to make semantic words in urls as the title of the job

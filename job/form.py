@@ -1,5 +1,5 @@
 from django import forms
-from .models import apply
+from .models import apply ,job
 
 #if the form is not for model
 # class apply_form(forms.form)
@@ -11,3 +11,12 @@ class apply_form(forms.ModelForm):
         model = apply
         fields = ['name','email','website','cv','cover_letter']
         
+
+
+class job_form(forms.ModelForm):
+    class Meta:
+        model = job
+        
+        # all fields in job model except slug fields
+        fields = '__all__' 
+        exclude = ('owner','slug') 
