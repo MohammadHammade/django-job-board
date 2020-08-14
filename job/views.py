@@ -5,6 +5,7 @@ from django.shortcuts import render
 from .form import apply_form ,job_form
 from django.urls import reverse
 
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def job_list(request):
@@ -45,6 +46,8 @@ def job_details(request, slug):
     return render(request,'job/job_detail.html',context)
 
 
+# decorator to make this function deosnt work without login
+@login_required
 def add_job(request):
     if request.method == "POST":
         form = job_form(request.POST,request.FILES)
