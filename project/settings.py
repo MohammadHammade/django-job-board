@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # my apps # write in terminal ( python manage.py migrate ) to migrate django file with database (users,authentication,groups ...)"Control Panel"
     'job',
+    'contact',
     'bootstrap4',
     'django_filters',
 ]
@@ -131,3 +132,15 @@ STATICFILES_DIRS = [
 
 STATIC_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+
+
+# django send email config
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend' 
+EMAIL_HOST = 'smtp.gmail.com' 
+EMAIL_HOST_USER = 'medo.spider0000@gmail.com'
+# this password genereated from mygmail account
+# from password > two step make it true > app password make new app
+# > mail , other , app name > generate 
+EMAIL_HOST_PASSWORD = 'zzfvnkqvqiadpzla'
+EMAIL_USE_TLS = True
+EMAIL_PORT = '587'
